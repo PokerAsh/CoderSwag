@@ -11,8 +11,8 @@ import com.yernarkt.coderswag.R
 import com.yernarkt.coderswag.model.CategoriesData
 
 class CategoriesAdapter(context: Context, categories: List<CategoriesData>) : BaseAdapter() {
-    val context = context;
-    val categories = categories;
+    val context = context
+    val categories = categories
 
     override fun getItem(position: Int): Any {
         return categories[position]

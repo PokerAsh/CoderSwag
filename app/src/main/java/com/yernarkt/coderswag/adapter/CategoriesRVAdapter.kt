@@ -10,14 +10,14 @@ import android.widget.TextView
 import com.yernarkt.coderswag.R
 import com.yernarkt.coderswag.model.CategoriesData
 
-class CategoriesRVAdapter(val context: Context, val categories: List<CategoriesData>) :
+class CategoriesRVAdapter(val context: Context, val categories: List<CategoriesData>, val itemClick: (CategoriesData) -> Unit) :
     RecyclerView.Adapter<CategoriesRVAdapter.CategoriesRVViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesRVViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false)
 
-        return CategoriesRVViewHolder(view)
+        return CategoriesRVViewHolder(view, itemClick)
     }
 
     override fun getItemCount(): Int {
@@ -29,7 +29,7 @@ class CategoriesRVAdapter(val context: Context, val categories: List<CategoriesD
         holder.bind(category, context)
     }
 
-    inner class CategoriesRVViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class CategoriesRVViewHolder(itemView: View, val itemClick: (CategoriesData) -> Unit) : RecyclerView.ViewHolder(itemView) {
         val categoryImage = itemView.findViewById<ImageView>(R.id.categoryImage)
         val categoryTitle = itemView.findViewById<TextView>(R.id.categoryName)!!
 
@@ -37,6 +37,8 @@ class CategoriesRVAdapter(val context: Context, val categories: List<CategoriesD
             val resourseId = context.resources.getIdentifier(category.image, "drawable", context.packageName)
             categoryImage.setImageResource(resourseId)
             categoryTitle.text = category.title
+
+            itemView.setOnClickListener { itemClick(category) }
         }
     }
 }
