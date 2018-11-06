@@ -5,7 +5,7 @@ import com.yernarkt.coderswag.model.ProductData
 
 object DataService {
     val categories = listOf(
-        CategoriesData("SHIRTS", "shirtmage"),
+        CategoriesData("SHIRTS", "shirtimage"),
         CategoriesData("HOODIES", "hoodieimage"),
         CategoriesData("HAT", "hatimage"),
         CategoriesData("DIGITAL", "digitalgoodsimage")
