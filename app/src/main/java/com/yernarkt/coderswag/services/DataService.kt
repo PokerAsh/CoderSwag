@@ -38,7 +38,7 @@ object DataService {
     fun getProducts(categories: String) : List<ProductData>{
         return when(categories){
             "SHIRTS" -> shirts
-            "HATS" -> hats
+            "HAT" -> hats
             "HOODIES" -> hoodies
             else -> digitalGoods
         }
