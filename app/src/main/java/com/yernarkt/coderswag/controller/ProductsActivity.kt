@@ -1,5 +1,6 @@
 package com.yernarkt.coderswag.controller
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -20,9 +21,22 @@ class ProductsActivity : AppCompatActivity() {
         println(categoryType)
 
         adapter = ProductsAdapter(this, DataService.getProducts(categoryType))
+
+        var spanCount = 2
+        val orientation = resources.configuration.orientation
+
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            spanCount = 3
+        }
+
+        val screenSize = resources.configuration.screenWidthDp
+        if (screenSize > 720) {
+            spanCount = 4
+        }
+
         productsListView.adapter = adapter
         productsListView.setHasFixedSize(true)
-        val manager = GridLayoutManager(this, 2)
+        val manager = GridLayoutManager(this, spanCount)
         productsListView.layoutManager = manager
     }
 }
