@@ -15,7 +15,7 @@ class CategoriesAdapter(context: Context, categories: List<CategoriesData>) : Ba
     val categories = categories;
 
     override fun getItem(position: Int): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return categories[position]
     }
 
     override fun getCount(): Int {
@@ -23,18 +23,36 @@ class CategoriesAdapter(context: Context, categories: List<CategoriesData>) : Ba
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val categoryView: View = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false)
-        val categoryImage: ImageView = categoryView.findViewById(R.id.categoryImage)
-        val categoryName: TextView = categoryView.findViewById(R.id.categoryName)
+        val categoryView: View
+        val holder: ViewHolder
+
+        if (convertView == null) {
+            categoryView = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false)
+            holder = ViewHolder()
+
+            holder.categoryImage = categoryView.findViewById(R.id.categoryImage)
+            holder.categoryTitle = categoryView.findViewById(R.id.categoryName)
+
+            categoryView.tag = holder
+        } else {
+            holder = convertView.tag as ViewHolder
+            categoryView = convertView
+        }
+
         val category = categories[position]
 
         val resourseId = context.resources.getIdentifier(category.image, "drawable", context.packageName)
-        categoryImage.setImageResource(resourseId)
-        categoryName.text = category.title
+        holder.categoryImage?.setImageResource(resourseId)
+        holder.categoryTitle?.text = category.title
         return categoryView
     }
 
     override fun getItemId(position: Int): Long {
         return 0
+    }
+
+    class ViewHolder {
+        var categoryImage: ImageView? = null
+        var categoryTitle: TextView? = null
     }
 }
