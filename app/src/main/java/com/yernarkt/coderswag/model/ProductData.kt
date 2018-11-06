@@ -1,3 +1,3 @@
 package com.yernarkt.coderswag.model
 
-class ProductData(title: String, price: String, image: String)
+class ProductData(val title: String, val price: String, val image: String)

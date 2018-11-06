@@ -1,3 +1,7 @@
 package com.yernarkt.coderswag.model
 
-class CategoriesData(title: String, image: String)
+class CategoriesData(val title: String, val image: String){
+    override fun toString(): String {
+        return title
+    }
+}
